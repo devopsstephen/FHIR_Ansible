@@ -1,0 +1,5 @@
+repo_name: git
+java_version: java-11
+mvn_version: 3.6.3
+mvn_home: /opt
+

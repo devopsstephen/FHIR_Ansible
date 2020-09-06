@@ -1,0 +1,7 @@
+---
+- name: enter host details
+  hosts: all
+  become: yes
+  roles:
+  - build
+...
