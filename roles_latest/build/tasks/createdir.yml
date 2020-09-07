@@ -1,0 +1,13 @@
+
+- stat:
+      path: /app/java
+  register: result
+- debug:
+      var: result
+
+- name: create directory
+  file:
+      path: /app/java
+      state: directory
+      recurse: yes
+  when: result.stat.exists == False

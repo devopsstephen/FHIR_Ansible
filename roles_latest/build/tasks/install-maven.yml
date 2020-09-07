@@ -1,0 +1,21 @@
+- name: Check If maven is already installed or not
+  shell: "mvn --version | grep -w 'Apache Maven' | awk '{print $3}'"
+  register: maven_installed
+
+- name: Installed maven version
+  debug: "msg={{maven_installed.stdout}}"
+
+- name: Download and Unarchive maven
+  unarchive:
+        src: "http://apachemirror.wuchna.com/maven/maven-3/{{ mvn_version }}/binaries/apache-maven-{{ mvn_version }}-bin.tar.gz"
+        dest: "{{ mvn_home }}"
+        remote_src: yes
+- name: set up maven
+  template:
+       src: maven.j2
+       dest: /etc/profile.d/maven.sh
+
+- name: Exports/Run maven env file for make M2_HOME available globally
+  shell: "source /etc/profile.d/maven.sh"
+...
+
